@@ -1,0 +1,80 @@
+version = 3
+
+# Newline before the entire prompt
+[[blocks]]
+type = "prompt"
+alignment = "left"
+# Prepend newline to the first segment instead of a separate block
+[[blocks.segments]]
+template = "\n{{ .Icon }} "  # Newline + OS icon
+foreground = "white"
+type = "os"
+style = "plain"
+
+[[blocks.segments]]
+template = "{{ .UserName }} "
+foreground = "#8f00ff"
+type = "session"
+style = "plain"
+
+[[blocks.segments]]
+template = "in "
+foreground = "#ffffff"
+type = "text"
+style = "plain"
+
+[[blocks.segments]]
+template = "{{ .Path }} "
+foreground = "#87FF00"
+type = "path"
+style = "plain"
+[blocks.segments.properties]
+  folder_icon = ""
+  style = "full"
+
+[[blocks.segments]]
+template = "<#ffffff>on</> {{ .HEAD }}{{ if .Staging.Changed }}<#87FF00> ● {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#D75F00> ● {{ .Working.String }}</>{{ end }} "
+foreground = "#5FD7FF"
+type = "git"
+style = "plain"
+[blocks.segments.properties]
+  fetch_status = true
+[[blocks]]
+type = "prompt"
+alignment = "right"
+
+[[blocks.segments]]
+template = "{{ .CurrentDate | date .Format }} "
+foreground = "#8f00ff"
+type = "time"
+style = "diamond"
+[blocks.segments.properties]
+  time_format = "Monday <#ffffff>at</> 3:04 PM"
+
+[[blocks.segments]]
+template = " {{ .FormattedMs }}s "
+foreground = "#d2b48c"
+type = "executiontime"
+style = "diamond"
+[blocks.segments.properties]
+  style = "dallas"
+  threshold = 0
+
+[[blocks.segments]]
+template = "MEM: {{ round .PhysicalPercentUsed .Precision }}% ({{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB) "
+foreground = "#f5f5f5 "
+type = "sysinfo"
+style = "diamond"
+# ❯ on a new line within the same left block
+[[blocks.segments]]
+template = "\n❯ "  # Newline forces ❯ below
+foreground = "#00ffff"
+type = "text"
+style = "plain"
+
+# Right-aligned block (Time, Execution Time, Memory, Battery)
+[[blocks]]
+type = "prompt"
+alignment = "right"
+
+

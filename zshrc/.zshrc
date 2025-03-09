@@ -1,0 +1,1 @@
+/home/bhupen/.config/zsh/zshrc
